@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Installing Nodejs
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        uses: actions/setup-node@v1.4.3
+        with:
+          node-version: 12.x
+      
+      - name: Installing Yarn
+        uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: install 
+          
+      - name: Building through Yarn
+        run: yarn build
+      
+      - name: Install Surge
+        run: npm install surge -g
+          
+      - name: Deploying webpage on Surge
+        run: surge ./build http://bootcamp_1_22_09_2020.surge.sh/ --token ${{secrets.bootcamp_1_22_09_2020}}

@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run a multi-line script
+      - name: Installing Nodejs
         uses: actions/setup-node@v1.4.3
         with:
           node-version: 12.x
